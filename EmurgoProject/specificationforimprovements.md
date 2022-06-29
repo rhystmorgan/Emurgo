@@ -30,7 +30,7 @@ Grid size: (61, 12)
 
 Game: Best Of x                                 Scoreboard
 Round: x                                        `Player`: x
-Strategy: x                                     `Croc`  : x
+Strategy: *Removed*                             `Croc`  : x
 
 `First Line Print Instructions Here`
 `Second Line for Print`
@@ -45,7 +45,7 @@ Controls:   | Rock      | Paper     | Scissors  |
 
 ---
 
-### Basic Strategy 
+### Random Strategy 
 
 - random implementation of plays
 - This will need to be implemented
@@ -57,6 +57,20 @@ take x $ unfoldr (\g -> let a, g') = random @Int g in Just (mod a 3, g')) (mkStd
 - where x is the number of plays required (bestOf x) and z is the (length of player's name)
 - This will leave me with a list of random numbers between 0-2
 
+- Slightly adjusted implementation in V2 where:
+
+randomMove x = randomMove ((length (show y)) * z)
+                          | Length of Move | C (Count of Plays inc Draws) |
+
+randomMove :: Int -> Move
+randomMove x = numMove $ randomList $ randomVal x
+
+randomVal :: Int -> Int
+randomVal x = fst $ random (mkStdGen x)
+
+randomList :: Int -> Int
+randomList x = randomVal x `mod` 3
+
 ### Reverse Strategy 
 
 - play the user's moves back at them
@@ -65,6 +79,8 @@ take x $ unfoldr (\g -> let a, g') = random @Int g in Just (mod a 3, g')) (mkStd
 - This look something like:
 - Store single value from previous round and pass that into the next game
 - Append `[Move]` with the latest `Move` using an index of `count - 1`
+
+- Unable To implement in V2 as I was having lots of confilcts in types and expected types and didnt have the time to figure out a simple solution to the problem
 
 ### Name Strategy 
 
@@ -93,6 +109,13 @@ take x $ unfoldr (\g -> let a, g') = random @Int g in Just (mod a 3, g')) (mkStd
 - The program will create a list of moves based on the given strategies and it will calculate plays based on the `count` and `length` of the `strategy`
 - If the `count` goes above the `length` the program will deduct `length` from `count` and use this as the index for the `strategy`
 - This will allow games to go on for ANY specified number of `rounds` without running out of moves
+
+- V2 Implementation:
+    I was unable to get the indexing to work effectively within the allotted time, so I have set the initial moves calculation to 2n ^ 2 * p
+
+    this means the length of the initial set of moves will take the intial set from the players name, then multiply it by (2* number of Rounds) ^2
+
+    This will create a 36 * 4 length list of Moves predefined (for a 4 letter name) meaning it would be practiacally impossible for the program to run out of moves in any given game. 
 
 ---
 

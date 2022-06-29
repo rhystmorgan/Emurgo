@@ -22,7 +22,7 @@ maintainer:         morgan.rhystomas@gmail.com
 extra-source-files: CHANGELOG.md
 
 executable EmurgoProject
-    main-is:          Main.hs
+    main-is:          GameUI.hs
 
     -- Modules included in this executable, other than Main.
     -- other-modules:
@@ -37,6 +37,7 @@ executable EmurgoProject
                     , splitmix 
                     , transformers
                     , containers
+                    , ansi-terminal
 
     hs-source-dirs:   app
     default-language: Haskell2010
